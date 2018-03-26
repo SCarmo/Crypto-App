@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
             button.innerHTML = user;
             button.id = user;
             button.className = "verified"; // allow user to see text
-
+            button.style.color = "blue";
             var body = document.getElementsByTagName("body")[0];
             body.appendChild(button);
 
             button.addEventListener("click", function () {
-                if(button.className == "verified")
+                if (button.className == "verified")
                     alert("you are verified");
                 else
                     alert("you arent verified asshole");
@@ -32,7 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // user is aready there
         else {
             var button = document.getElementById(user);
-            button.className = button.className == "verified" ? "unverified":"verified";
+            if (button.className == "verified") {
+                button.style.color = "red";
+                button.className = "unverified";
+            }
+            else{
+                button.style.color = "blue";
+                button.className = "verified";
+            }
         }
 
     }, false);
