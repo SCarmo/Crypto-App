@@ -4,11 +4,11 @@ if (window.location.href.indexOf("twitter.com") > -1) { // only work on twitter
     // for each tweet
     $('div.js-tweet-text-container > p').each(function (index) {
         //encrypt all the tweets and shit
+        $(this).text(index + " ERROR");
     });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-
     var addOrRemove = document.getElementById('addOrRemove');
     addOrRemove.addEventListener('click', function () {
         var user = document.getElementById("user").value;
@@ -17,28 +17,22 @@ document.addEventListener('DOMContentLoaded', function () {
             var button = document.createElement("button");
             button.innerHTML = user;
             button.id = user;
+            button.className = "verified"; // allow user to see text
 
             var body = document.getElementsByTagName("body")[0];
             body.appendChild(button);
+
+            button.addEventListener("click", function () {
+                if(button.className == "verified")
+                    alert("you are verified");
+                else
+                    alert("you arent verified asshole");
+            });
         }
-        // user is laready there
-        else{
-            document.getElementById(user).remove();
-        }
-
-    }, false);
-
-    // for login
-    var checkCredentials = document.getElementById('checkCredentials');
-    checkCredentials.addEventListener('click', function () {
-        var usr = document.getElementById("username").value;
-        var psw = document.getElementById("password").value;
-        if (usr == psw) {
-
-            alert("success");
-
-        } else {
-            alert("incorrect");
+        // user is aready there
+        else {
+            var button = document.getElementById(user);
+            button.className = button.className == "verified" ? "unverified":"verified";
         }
 
     }, false);
