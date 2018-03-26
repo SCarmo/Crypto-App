@@ -11,10 +11,10 @@
   },
   "background":
   {
-      "scripts": ["jquery-3.3.1.min.js", "popup.js"]
+      "scripts": ["jquery-3.3.1.min.js", "sjcl.js", "popup.js"]
   },
   "content_scripts": [ {
-    "js": [ "jquery-3.3.1.min.js", "popup.js" ],
+    "js": [ "jquery-3.3.1.min.js", "sjcl.js", "popup.js" ],
     "matches": [ "http://*/*", "https://*/*"]
   }]
 
