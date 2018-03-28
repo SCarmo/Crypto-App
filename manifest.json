@@ -9,13 +9,15 @@
    "default_icon": "icon.png",
    "default_popup": "popup.html"
   },
-  "background":
-  {
-      "scripts": ["jquery-3.3.1.min.js", "sjcl.js", "popup.js"]
-  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"    
+  ],
   "content_scripts": [ {
     "js": [ "jquery-3.3.1.min.js", "sjcl.js", "popup.js" ],
-    "matches": [ "http://*/*", "https://*/*"]
+    "matches": [ "*://*.twitter.com/*"]
   }]
 
 }
