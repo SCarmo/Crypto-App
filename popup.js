@@ -1,19 +1,17 @@
 var pair;
+var encryptedObjects = [];
 if (window.location.href.indexOf("twitter.com") > -1) { // only work on twitter
 
     pair = sjcl.ecc.elGamal.generateKeys(256); // generate keys
+
 
     // for each tweet
     $('div.js-tweet-text-container > p').each(function (index) {
         //encrypt all the tweets and shit
         var text = $(this).text();
         var ct = sjcl.encrypt(pair.pub, text);
-        var pt = sjcl.decrypt(pair.sec, ct);
-        /*chrome.storage.sync.set({
-            key: value
-        }, function () {
-            console.log('Value is set to ' + value);
-        });*/
+        encryptedObjects.push(ct);
+        //var pt = sjcl.decrypt(pair.sec, ct);
         var cipherText = JSON.parse(ct);
         $(this).text(cipherText.ct);
     });
@@ -41,8 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     chrome.tabs.executeScript({
                         file: "decrypt.js"
                     });
-                } 
-                else {
+                } else {
+                    // make new keys
+                    // decrypt again
                     chrome.tabs.executeScript({
                         file: "encrypt.js"
                     });
@@ -56,8 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (button.className == "verified") {
                 button.style.color = "red";
                 button.className = "unverified";
-                // give em the keys and shit
-            } else {
+            } else { // user is not verified
                 button.style.color = "blue";
                 button.className = "verified";
                 // give out new keys
