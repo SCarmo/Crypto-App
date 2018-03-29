@@ -55,11 +55,15 @@ document.addEventListener('DOMContentLoaded', function () {
             if (button.className == "verified") {
                 button.style.color = "red";
                 button.className = "unverified";
+                // give out new keys so old users cannot decrypt
+                pair = sjcl.ecc.elGamal.generateKeys(256); // generate keys
+                encryptedObjects = [];
+                chrome.tabs.executeScript({
+                    file: "newKeys.js"
+                });
             } else { // user is not verified
                 button.style.color = "blue";
                 button.className = "verified";
-                // give out new keys
-                pair = sjcl.ecc.elGamal.generateKeys(256); // generate keys
                 
             }
         }
