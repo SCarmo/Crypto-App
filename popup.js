@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.style.color = "blue";
                 button.className = "verified";
                 // give out new keys
+                pair = sjcl.ecc.elGamal.generateKeys(256); // generate keys
+                
             }
         }
 
